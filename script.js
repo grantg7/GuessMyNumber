@@ -19,18 +19,20 @@ let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highScore = 0;
 
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
   console.log(guess, typeof guess);
 
   // when there is no input
   if (!guess) {
-    document.querySelector('.message').textContent = 'NO NUMBER! ⛔';
+    displayMessage('NO NUMBER! ⛔');
 
     // When player wins
   } else if (guess === secretNumber) {
-    document.querySelector('.message').textContent = 'CORRECT! 😁';
-
+    displayMessage('CORRECT! 😁');
     document.querySelector('.number').textContent = secretNumber;
 
     document.querySelector('body').style.backgroundColor = '#60b347';
@@ -42,35 +44,48 @@ document.querySelector('.check').addEventListener('click', function () {
       document.querySelector('.highscore').textContent = highScore;
     }
 
-    // When guess is too high
-  } else if (guess > secretNumber) {
+    //When the guess is wrong
+  } else if (guess !== secretNumber) {
     if (score > 1) {
-      document.querySelector('.message').textContent = 'TOO HIGH! ⬆️';
+      displayMessage(guess > secretNumber ? 'TOO HIGH! ⬆️' : 'TOO LOW! ⬇️');
       score--;
       document.querySelector('.score').textContent = score;
     } else {
-      document.querySelector('.message').textContent = 'GAME OVER!☠️';
-      document.querySelector('.score').textContent = 0;
-    }
-    // When guess is too low
-  } else if (guess < secretNumber) {
-    if (score > 1) {
-      document.querySelector('.message').textContent = 'TOO LOW! ⬇️';
-      score--;
-      document.querySelector('.score').textContent = score;
-    } else {
-      document.querySelector('.message').textContent = 'GAME OVER!☠️';
+      displayMessage('GAME OVER! ☠️');
       document.querySelector('.score').textContent = 0;
     }
   }
 });
+
+//     // When guess is too high
+//   else if (guess > secretNumber) {
+//     if (score > 1) {
+//       document.querySelector('.message').textContent = 'TOO HIGH! ⬆️';
+//       score--;
+//       document.querySelector('.score').textContent = score;
+//     } else {
+//       document.querySelector('.message').textContent = 'GAME OVER!☠️';
+//       document.querySelector('.score').textContent = 0;
+//     }
+//     // When guess is too low
+//   } else if (guess < secretNumber) {
+//     if (score > 1) {
+//       document.querySelector('.message').textContent = 'TOO LOW! ⬇️';
+//       score--;
+//       document.querySelector('.score').textContent = score;
+//     } else {
+//       document.querySelector('.message').textContent = 'GAME OVER!☠️';
+//       document.querySelector('.score').textContent = 0;
+//     }
+//   }
+// });
 
 // This is my take on this code... lets see what he does.
 document.querySelector('.again').addEventListener('click', function () {
   score = 20;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
 
-  document.querySelector('.message').textContent = 'Start guessing...';
+  displayMessage('Start Guessing...');
   document.querySelector('.score').textContent = score;
   document.querySelector('.number').textContent = '?';
   document.querySelector('.guess').value = '';
@@ -78,3 +93,26 @@ document.querySelector('.again').addEventListener('click', function () {
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
 });
+
+//     // When guess is too high
+//   else if (guess > secretNumber) {
+//     if (score > 1) {
+//       document.querySelector('.message').textContent = 'TOO HIGH! ⬆️';
+//       score--;
+//       document.querySelector('.score').textContent = score;
+//     } else {
+//       document.querySelector('.message').textContent = 'GAME OVER!☠️';
+//       document.querySelector('.score').textContent = 0;
+//     }
+//     // When guess is too low
+//   } else if (guess < secretNumber) {
+//     if (score > 1) {
+//       document.querySelector('.message').textContent = 'TOO LOW! ⬇️';
+//       score--;
+//       document.querySelector('.score').textContent = score;
+//     } else {
+//       document.querySelector('.message').textContent = 'GAME OVER!☠️';
+//       document.querySelector('.score').textContent = 0;
+//     }
+//   }
+// });
